@@ -1,0 +1,18 @@
+const Joi = require('joi');
+
+const User = Joi.object({
+    email : Joi.string()
+    .pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)
+    .email({
+        minDomainSegments : 2,
+        tlds : {allow : ['com', 'net']}
+    })
+    .required(),
+    password : Joi.string()
+    .min(3)
+    .max(8)
+    .alphanum()
+    .required()
+});
+
+module.exports = User;
